@@ -8,16 +8,24 @@ from pynput.mouse import Button, Controller
 from threading import Thread
 import time
 
-mouse = Controller()
-start = False
 
+# Variables
 speed = .080  # in ms, less values = more clicks
+
+isToggleKeyAChar = True  # if toggle key is any character such as 'r' or 'q' set this to True otherwise if toggleKey is like F6 then set it to False
+toggleKey = "r"
+
+clickType = Button.left  # Button.left, Button.right, Button.middle
+isDoubleClick = False
+
+# send debug message?
 debug = False
 
-isToggleKeyAChar = False  # if toggle key is any character such as 'r' or 'q' set this to True otherwise if toggleKey is like F6 then set it to False
-toggleKey = "f6"
 
-isDoubleClick = False
+# define mouse
+mouse = Controller()
+# Don't edit this - toggle script
+start = False
 
 
 # click function
@@ -27,7 +35,7 @@ def click():
         if debug is True:
             print('clicked')
 
-        mouse.click(Button.left, 2 if isDoubleClick else 1)
+        mouse.click(clickType, 2 if isDoubleClick else 1)
         time.sleep(speed)  # ms
 
 
